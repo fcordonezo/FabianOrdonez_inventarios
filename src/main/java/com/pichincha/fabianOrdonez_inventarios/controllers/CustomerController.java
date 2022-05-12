@@ -47,7 +47,7 @@ public class CustomerController {
     return ResponseEntity.created(location).build();
   }
 
-  @PutMapping("/{id}")
+  @PatchMapping("/{id}")
   public ResponseEntity<CustomerDto> updateCustomer(
       @PathVariable("id") Long id,
       @RequestBody CustomerDto customerDto
