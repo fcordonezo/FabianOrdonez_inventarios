@@ -18,7 +18,7 @@ mvn spring-boot:run
 
 ### Swagger ###
 
-We use Swagger to document the API.
+I use Swagger to document the API.
 
 ```shell
 api/v1/swagger-ui/index.html
@@ -26,7 +26,7 @@ api/v1/swagger-ui/index.html
 
 ### Testing ###
 
-We use JaCoCo to run tests and generate reports. In order you to be
+I use JaCoCo to run tests and generate reports. In order you to be
 able to see the JaCoCo report, you must first run:
 
 ```shell
