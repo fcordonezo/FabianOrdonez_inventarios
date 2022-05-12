@@ -16,6 +16,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @ControllerAdvice
 public class ResponseEntityExceptionHandler {
 
+  @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(value = {ResourceNotFoundException.class, EmptyResultDataAccessException.class})
   public ResponseEntity<ResponseErrorStructure> handleResourceNotFound(Exception exception){
     log.error(exception.getMessage());
@@ -29,6 +30,7 @@ public class ResponseEntityExceptionHandler {
     );
   }
 
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(value = {
       MethodArgumentTypeMismatchException.class,
       MethodArgumentNotValidException.class,
@@ -46,6 +48,7 @@ public class ResponseEntityExceptionHandler {
     );
   }
 
+  @ResponseStatus(HttpStatus.CONFLICT)
   @ExceptionHandler(value = {ConflictException.class})
   public ResponseEntity<ResponseErrorStructure> handleConflict(Exception exception){
     log.error(exception.getMessage());
@@ -59,6 +62,7 @@ public class ResponseEntityExceptionHandler {
     );
   }
 
+  @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
   @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
   public ResponseEntity<ResponseErrorStructure> handleMethodNotSupported(Exception exception){
     log.error(exception.getMessage());
