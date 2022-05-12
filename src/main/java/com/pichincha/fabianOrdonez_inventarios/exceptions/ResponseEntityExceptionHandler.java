@@ -5,9 +5,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Log4j2
@@ -54,6 +56,19 @@ public class ResponseEntityExceptionHandler {
             .exceptionCode(HttpStatus.CONFLICT.toString())
             .build(),
         HttpStatus.CONFLICT
+    );
+  }
+
+  @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
+  public ResponseEntity<ResponseErrorStructure> handleMethodNotSupported(Exception exception){
+    log.error(exception.getMessage());
+    return new ResponseEntity<>(
+      ResponseErrorStructure.builder()
+        .title("METHOD NOT ALLOWED")
+        .message(exception.getMessage())
+        .exceptionCode(HttpStatus.METHOD_NOT_ALLOWED.toString())
+        .build(),
+      HttpStatus.METHOD_NOT_ALLOWED
     );
   }
 }
